@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/database/noates_database.dart';
+import 'package:notes_app/screens/note_card.dart';
+import 'package:notes_app/screens/note_dialog.dart';
 
 class NotesScreen extends StatefulWidget {
   const NotesScreen({super.key});
@@ -25,6 +27,62 @@ class _NotesScreenState extends State<NotesScreen> {
     });
   }
 
+  final List<int> notecolors = [
+    0xFFB9FBC0, // Green
+    0xFFFFF3B0, // Yellow
+    0xFFFFC3A0, // Orange
+    0xFFB28DFF, // Purple
+    0xFFB9FBC0, // Light Green
+    0xFFB2E4FF, // Light Blue
+    0xFFFFB2B2, // Light Red
+  ];
+
+  void showNoteDialog({
+    int? id,
+    String? title,
+    String? content,
+    int colorIndex = 0,
+  }) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return NoteDialog(
+          colorIndex: colorIndex,
+          notecolors: notecolors,
+          noteId: id,
+          title: title,
+          content: content,
+          onNoteSaved:
+              (
+                newTitle,
+                newDescription,
+                selectedColorIndex,
+                currentDate,
+              ) async {
+                if (id == null) {
+                  await NoatesDatabase.instance.addNote(
+                    newTitle,
+                    newDescription,
+                    currentDate,
+                    selectedColorIndex,
+                  );
+                } else {
+                  await NoatesDatabase.instance.updateNote(
+                    newTitle,
+                    newDescription,
+                    currentDate,
+                    selectedColorIndex,
+                    id,
+                  );
+                }
+                await fetchNotes(); // Refresh notes after save
+                Navigator.of(dialogContext).pop(); // Close dialog after save
+              },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +99,17 @@ class _NotesScreenState extends State<NotesScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          // await NoatesDatabase.instance.addNote(
+          //   'Sample Title',
+          //   'Sample Description',
+          //   DateTime.now().toIso8601String(),
+          //   0, // Default color index
+          // );
+          showNoteDialog();
+        },
         backgroundColor: Colors.white,
-        child: const Icon(Icons.add,
-        color: Colors.black87, 
-        size: 30),
+        child: const Icon(Icons.add, color: Colors.black87, size: 30),
       ),
       body: notes.isEmpty
           ? Center(
@@ -72,17 +136,32 @@ class _NotesScreenState extends State<NotesScreen> {
           : Padding(
               padding: const EdgeInsets.all(16),
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
-                  mainAxisExtent: 16,
-                  childAspectRatio: 0.85,
+                  mainAxisSpacing: 16, // Added for vertical spacing
+                  childAspectRatio:
+                      0.85, // This is sufficient to control the height
                 ),
                 itemCount: notes.length,
                 itemBuilder: (context, index) {
                   final note = notes[index];
-
-                  return Text(note['title']);
+                  return NoteCard(
+                    note: note,
+                    ontap: (id, title, description, colorIndex) {
+                      showNoteDialog(
+                        id: id,
+                        title: title,
+                        content: description,
+                        colorIndex: colorIndex,
+                      );
+                    },
+                    onDelete: () async {
+                      await NoatesDatabase.instance.deleteNote(note['id']);
+                      await fetchNotes();
+                    },
+                    notecolors: notecolors,
+                  );
                 },
               ),
             ),
