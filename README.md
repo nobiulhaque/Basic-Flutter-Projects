@@ -6,12 +6,45 @@ Welcome to **Basic Flutter Projects**! This repository contains a collection of 
 
 ## 🚀 Projects Included
 
-### 📝 1. Notes App
-A basic app to create, read, update, and delete text notes.
-- Features local state management
-- Minimalist UI
-- Great for learning ListViews and text input handling
+# 📝 Flutter Notes App
 
+A beautiful, color-coded note-taking application built with Flutter and SQLite for local storage.
+
+![App Screenshot](screenshot.png) <!-- Add your screenshot here -->
+
+## ✨ Features
+
+- **Color-coded notes** - Organize with 7 vibrant colors
+- **CRUD Operations** - Create, Read, Update, Delete notes
+- **Responsive Grid View** - Adaptive layout for all screen sizes
+- **Dark/Light Theme** - Automatic system theme detection
+- **Local Storage** - SQLite database persistence
+- **Intuitive UI** - Clean Material Design interface
+
+## 🛠️ Tech Stack
+
+- **Flutter** 3.x
+- **sqflite** - Local SQLite database
+- **intl** - Date formatting
+- **Material Design** Components
+
+## 📁 Project Structure
+text
+notes_app/
+├── android/               # Android specific files
+├── ios/                   # iOS specific files
+├── lib/
+│   ├── screens/
+│   │   ├── notes_screen.dart  # Main notes interface
+│   │   ├── note_card.dart     # Note widget component
+│   │   └── note_dialog.dart   # Add/edit note dialog
+│   ├── database/
+│   │   └── notes_database.dart # SQLite database helper
+│   └── main.dart           # App entry point
+├── pubspec.yaml           # Dependencies config
+└── README.md
+
+---
 ### 🎲 2. Dice Rolling App
 A fun app that simulates dice rolling.
 - Random number generation
