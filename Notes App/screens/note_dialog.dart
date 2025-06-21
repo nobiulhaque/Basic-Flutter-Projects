@@ -27,8 +27,14 @@ class _NoteDialogState extends State<NoteDialog> {
   late int _selectedColorIndex;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    _selectedColorIndex =
+        widget.colorIndex; // Initialize with passed colorIndex
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final titleController = TextEditingController(text: widget.title);
     final descriptionController = TextEditingController(text: widget.content);
     final currentDate = DateFormat('dd MMMM yyyy').format(DateTime.now());
@@ -48,46 +54,95 @@ class _NoteDialogState extends State<NoteDialog> {
           children: [
             Text(
               currentDate,
-              style: const TextStyle(
-                color: Colors.black54,
-                fontSize: 14,
+              style: const TextStyle(color: Colors.black54, fontSize: 14),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: titleController,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white.withAlpha((0.5 * 255).toInt()),
+                labelText: 'Title',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  // borderSide: BorderSide.none,
                 ),
               ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: titleController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white.withAlpha((0.5 * 255).toInt()),
-                  labelText: 'Title',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  )
+            ),
+
+            const SizedBox(height: 16),
+
+            TextField(
+              controller: descriptionController,
+              maxLines: 5,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white.withAlpha((0.5 * 255).toInt()),
+                labelText: 'Description',
+                alignLabelWithHint: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  // borderSide: BorderSide.none,
                 ),
               ),
+            ),
 
-              const SizedBox(height: 16),
-
-              TextField(
-                controller: descriptionController,
-                maxLines: 5,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white.withAlpha((0.5 * 255).toInt()),
-                  labelText: 'Description',
-                  alignLabelWithHint: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  )
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              children: List.generate(
+                widget.notecolors.length,
+                (index) => GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedColorIndex = index;
+                    });
+                  },
+                  child: CircleAvatar(
+                    radius: 16,
+                    backgroundColor: Color(widget.notecolors[index]),
+                    child: _selectedColorIndex == index
+                        ? const Icon(
+                            Icons.check,
+                            color: Colors.black54,
+                            size: 16,
+                          )
+                        : null,
+                  ),
                 ),
               ),
-
-
-            ],
+            ),
+          ],
         ),
       ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Cancel', style: TextStyle(color: Colors.black54)),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.black87,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          onPressed: () async {
+            final newTitle = titleController.text;
+            final newDescription = descriptionController.text;
+
+            widget.onNoteSaved(
+              newTitle,
+              newDescription,
+              _selectedColorIndex,
+              currentDate,
+            );
+          },
+          child: Text('Save'),
+        ),
+      ],
     );
   }
 }
