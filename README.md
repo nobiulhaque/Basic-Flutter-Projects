@@ -10,8 +10,6 @@ Welcome to **Basic Flutter Projects**! This repository contains a collection of 
 
 A beautiful, color-coded note-taking application built with Flutter and SQLite for local storage.
 
-![App Screenshot](screenshot.png) <!-- Add your screenshot here -->
-
 ## ✨ Features
 
 - **Color-coded notes** - Organize with 7 vibrant colors
@@ -27,28 +25,6 @@ A beautiful, color-coded note-taking application built with Flutter and SQLite f
 - **sqflite** - Local SQLite database
 - **intl** - Date formatting
 - **Material Design** Components
-
-## 📁 Project Structure
-
-```text
-notes_app/
-├── android/               # Android platform-specific files
-│   ├── app/               # Android app module
-│   └── gradle/            # Gradle wrapper files
-├── ios/                   # iOS platform-specific files
-│   ├── Runner/            # iOS app bundle
-│   └── Podfile            # CocoaPods dependencies
-├── lib/                   # Main application code
-│   ├── screens/           # UI screens
-│   │   ├── notes_screen.dart  # Main notes interface (StatefulWidget)
-│   │   ├── note_card.dart     # Individual note card (StatelessWidget) 
-│   │   └── note_dialog.dart   # Add/edit dialog (StatefulWidget)
-│   ├── database/          # Data layer
-│   │   └── notes_database.dart # SQLite database helper (Singleton)
-│   └── main.dart          # App entry point (StatelessWidget)
-├── pubspec.yaml           # Flutter dependencies/config
-└── README.md             # Project documentation 
-
 ---
 ### 🎲 2. Dice Rolling App
 A fun app that simulates dice rolling.
