@@ -29,20 +29,25 @@ A beautiful, color-coded note-taking application built with Flutter and SQLite f
 - **Material Design** Components
 
 ## 📁 Project Structure
-text
+
+```text
 notes_app/
-├── android/               # Android specific files
-├── ios/                   # iOS specific files
-├── lib/
-│   ├── screens/
-│   │   ├── notes_screen.dart  # Main notes interface
-│   │   ├── note_card.dart     # Note widget component
-│   │   └── note_dialog.dart   # Add/edit note dialog
-│   ├── database/
-│   │   └── notes_database.dart # SQLite database helper
-│   └── main.dart           # App entry point
-├── pubspec.yaml           # Dependencies config
-└── README.md
+├── android/               # Android platform-specific files
+│   ├── app/               # Android app module
+│   └── gradle/            # Gradle wrapper files
+├── ios/                   # iOS platform-specific files
+│   ├── Runner/            # iOS app bundle
+│   └── Podfile            # CocoaPods dependencies
+├── lib/                   # Main application code
+│   ├── screens/           # UI screens
+│   │   ├── notes_screen.dart  # Main notes interface (StatefulWidget)
+│   │   ├── note_card.dart     # Individual note card (StatelessWidget) 
+│   │   └── note_dialog.dart   # Add/edit dialog (StatefulWidget)
+│   ├── database/          # Data layer
+│   │   └── notes_database.dart # SQLite database helper (Singleton)
+│   └── main.dart          # App entry point (StatelessWidget)
+├── pubspec.yaml           # Flutter dependencies/config
+└── README.md             # Project documentation 
 
 ---
 ### 🎲 2. Dice Rolling App
