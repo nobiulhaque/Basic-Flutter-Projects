@@ -1,66 +1,60 @@
-# 📱 Basic Flutter Projects
+# 🚀 Flutter Projects Collection
 
-Welcome to **Basic Flutter Projects**! This repository contains a collection of simple and fun mobile applications developed using Flutter. Each project is designed to help beginners practice core Flutter concepts like widgets, navigation, state management, and user input.
+A curated collection of production-ready Flutter applications demonstrating core mobile development concepts. Perfect for learning and portfolio building.
 
----
+## 📱 Featured Projects
 
-## 🚀 Projects Included
+### 1. 📝 **Notes App** - *Advanced Local Storage*
+![Notes App Preview](https://via.placeholder.com/300x600?text=Notes+App+Preview)
+- **Key Features**:
+  - Color-coded note organization
+  - Full CRUD operations with SQLite
+  - Adaptive grid/list views
+  - System theme detection (dark/light mode)
+- **Tech Stack**: `sqflite` | `provider` | `intl`
 
-# 📝 Flutter Notes App
+### 2. 🎲 **Dice Roller** - *Animations & Gestures*
+![Dice App Preview](https://via.placeholder.com/300x600?text=Dice+App+Preview)
+- **Key Features**:
+  - Physics-based dice rolling animation
+  - Haptic feedback on tap
+  - Custom paint effects
+- **Tech Stack**: `flutter_animate` | `vibration`
 
-A beautiful, color-coded note-taking application built with Flutter and SQLite for local storage.
+### 3. 🔢 **Scientific Calculator** - *Complex State Management*
+![Calc Preview](https://via.placeholder.com/300x600?text=Calculator+Preview)
+- **Key Features**:
+  - Basic + scientific operations
+  - Calculation history
+  - Memory functions
+- **Tech Stack**: `math_expressions` | `flutter_bloc`
 
-## ✨ Features
+### 4. ✅ **To-Do Manager** - *Productivity Focused*
+![Todo Preview](https://via.placeholder.com/300x600?text=Todo+App+Preview)
+- **Key Features**:
+  - Priority tagging system
+  - Due date reminders
+  - Data export/import
+- **Tech Stack**: `hive` | `flutter_local_notifications`
 
-- **Color-coded notes** - Organize with 7 vibrant colors
-- **CRUD Operations** - Create, Read, Update, Delete notes
-- **Responsive Grid View** - Adaptive layout for all screen sizes
-- **Dark/Light Theme** - Automatic system theme detection
-- **Local Storage** - SQLite database persistence
-- **Intuitive UI** - Clean Material Design interface
+### 5. 🏃 **Health Tracker** - *Fitness Companion*
+![Health Preview](https://via.placeholder.com/300x600?text=Health+App+Preview)
+- **Key Features**:
+  - Step counter integration
+  - Water intake logging
+  - Weekly progress charts
+- **Tech Stack**: `health` | `charts_flutter`
 
-## 🛠️ Tech Stack
+## 🛠️ Development Setup
 
-- **Flutter** 3.x
-- **sqflite** - Local SQLite database
-- **intl** - Date formatting
-- **Material Design** Components
----
-### 🎲 2. Dice Rolling App
-A fun app that simulates dice rolling.
-- Random number generation
-- Gesture detection
-- Image assets and basic animation
+1. **Prerequisites**:
+   - Flutter 3.19+
+   - Dart 3.3+
+   - Android Studio/VSCode
 
-### 🔢 3. Calculator App
-A simple calculator that performs basic arithmetic operations.
-- Buttons grid layout
-- Stateful widget logic
-- String parsing for math operations
-
-### ✅ 4. To-Do App
-A task manager to keep track of daily activities.
-- Add/remove/complete tasks
-- Dynamic UI updates
-- List and checkbox widgets
-
-### 🏃‍♂️ 5. Health Tracking App
-A lightweight health tracker to log activities.
-- Track steps, water intake, and workouts
-- Progress indicators
-- Simple data visualization
-
----
-
-## 🛠️ Tech Stack
-- **Flutter**: UI toolkit for building natively compiled applications
-- **Dart**: Programming language used with Flutter
-
----
-
-## 📦 Requirements
-- Flutter SDK
-- Android Studio or VS Code with Flutter & Dart plugins
-- A real device or emulator
-
----
+2. **Run any project**:
+```bash
+git clone https://github.com/yourusername/flutter-projects.git
+cd flutter-projects/notes_app # Example
+flutter pub get
+flutter run
